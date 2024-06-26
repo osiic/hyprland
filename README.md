@@ -4,6 +4,7 @@ cemu setup hyprland
 ## Tech
 - yay
 - hyprland-git
+- waybar: Waybar now has hyprland support
 - kitty: terminal
 - wlogout: This is a logout menu that allows for shutdown, reboot and sleep
 - ttf-jetbrains-mono-nerd: Font
@@ -21,5 +22,5 @@ cemu setup hyprland
 ```
 yay -S hyprland-git kitty wlogout ttf-jetbrains-mono-nerd \
 noto-fonts-emoji wofi brightnessctl thunar pamixer gvfs \
-xdg-desktop-portal-hyprland swaybg
+xdg-desktop-portal-hyprland swaybg waybar
 ```

@@ -16,7 +16,10 @@ cemu setup hyprland
 - gvfs: adds missing functionality to thunar such as automount usb drives
 - xdg-desktop-portal-hyprland: xdg-desktop-portal backend for hyprland
 - swaybg: This is used to set a desktop background image
+- bluez: the bluetooth service
+- bluez-utils: command line utilities to interact with bluettoth devices
 
+<br ><br >
 
 ## Script
 
@@ -46,6 +49,7 @@ yay -S hyprland-git kitty wlogout ttf-jetbrains-mono-nerd \
 noto-fonts-emoji wofi brightnessctl thunar pamixer gvfs \
 xdg-desktop-portal-hyprland swaybg waybar
 ```
+<br ><br >
 
 ## Using Yay for package management
 - Search for packages with:

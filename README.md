@@ -87,6 +87,16 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
 fi
 ```
 
+### Auto use tmux
+```
+nvim .zshrc
+```
+```
+if [ "$TMUX" = "" ]; then
+ tmux;
+fi
+```
+
 <br ><br >
 
 ## Using Yay for package management

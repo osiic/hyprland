@@ -53,40 +53,38 @@ xdg-desktop-portal-hyprland swaybg waybar zsh tmux
 ```
 
 ### Remap Power Button
-` sudo nvim /etc/systemd/logind.conf `
+```
+ sudo nvim /etc/systemd/logind.conf 
+```
 ```
 HandlePowerKey=ignore
 HandlePowerKeyLongPress=ignore
 HandleLidSwitch=hibernate
 PowerKeyIgnoreInhibited=yes
 ```
-` nvim ~/.config/hypr/hyprland.conf ` 
+```
+nvim ~/.config/hypr/hyprland.conf
+```
 ```
 bind = , xf86poweroff , exec, wlogout --protocol layar-shell 
 ```
 
+### auto login (no user and no pass)
+```
+sudo nvim /etc/systemd/system/getty.target.wants/getty@tty1.service 
+```
+```
+ExecStart=-/sbin/agetty -a {username} - $TERM
+```
+
 ### Startup Hyprland
 ```
-sudo nvim /etc/systemd/system/hyprland.service
+nvim .zshrc
 ```
 ```
-[Unit]
-Description=Hyprland Service
-After=network.target
-
-[Service]
-ExecStart=/path/to/hyprland
-Restart=always
-RestartSec=3
-
-[Install]
-WantedBy=default.target
-```
-```
-sudo systemctl daemon-reload
-sudo systemctl enable hyprland.service
-sudo systemctl start hyprland.service
-sudo systemctl status hyprland.service
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+  exec /usr/bin/Hyprland
+fi
 ```
 
 <br ><br >

@@ -65,6 +65,30 @@ PowerKeyIgnoreInhibited=yes
 bind = , xf86poweroff , exec, wlogout --protocol layar-shell 
 ```
 
+### Startup Hyprland
+```
+sudo nvim /etc/systemd/system/hyprland.service
+```
+```
+[Unit]
+Description=Hyprland Service
+After=network.target
+
+[Service]
+ExecStart=/path/to/hyprland
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl enable hyprland.service
+sudo systemctl start hyprland.service
+sudo systemctl status hyprland.service
+```
+
 <br ><br >
 
 ## Using Yay for package management

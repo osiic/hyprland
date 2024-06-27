@@ -51,6 +51,20 @@ yay -S hyprland-git kitty wlogout ttf-jetbrains-mono-nerd \
 noto-fonts-emoji wofi brightnessctl thunar pamixer gvfs \
 xdg-desktop-portal-hyprland swaybg waybar zsh tmux
 ```
+
+### Remap Power Button
+` sudo nvim /etc/systemd/logind.conf `
+```
+HandlePowerKey=ignore
+HandlePowerKeyLongPress=ignore
+HandleLidSwitch=hibernate
+PowerKeyIgnoreInhibited=yes
+```
+` nvim ~/.config/hypr/hyprland.conf ` 
+```
+bind = , xf86poweroff , exec, wlogout --protocol layar-shell 
+```
+
 <br ><br >
 
 ## Using Yay for package management
@@ -58,23 +72,23 @@ xdg-desktop-portal-hyprland swaybg waybar zsh tmux
 ```
 yay search_term
 ```
-- Install the packages with:
+### Install the packages with:
 ```
 yay -S package_name
 ```
-- Remove packages with:
+### Remove packages with:
 ```
 yay -R package_name
 ```
-- To delete a package with its dependencies:
+### To delete a package with its dependencies:
 ```
 yay -Rns package_name
 ```
-- Upgrading (only) the AUR packages:
+### Upgrading (only) the AUR packages:
 ```
 yay -Sua
 ```
-- Removing Yay from your Arch system
+### Removing Yay from your Arch system
 ```
 sudo pacman -Rs yay
 ```

@@ -35,7 +35,7 @@ sudo pacman -Syyuu
 sudo pacman -S --needed base-devel git neofetch neovim
 ```
 
-### Install [yay](https://github.com/osiic/hyprland/yay.md)
+### Install [yay.md](https://github.com/osiic/hyprland/blob/main/yay.md)
 ``` cmd
 cd ~
 cd .config/

@@ -18,6 +18,8 @@ cemu setup hyprland
 - swaybg: This is used to set a desktop background image
 - bluez: the bluetooth service
 - bluez-utils: command line utilities to interact with bluettoth devices
+- zsh 
+- tmux
 
 <br ><br >
 
@@ -47,7 +49,7 @@ yay --version
 ``` cmd
 yay -S hyprland-git kitty wlogout ttf-jetbrains-mono-nerd \
 noto-fonts-emoji wofi brightnessctl thunar pamixer gvfs \
-xdg-desktop-portal-hyprland swaybg waybar
+xdg-desktop-portal-hyprland swaybg waybar zsh tmux
 ```
 <br ><br >
 

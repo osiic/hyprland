@@ -4,6 +4,13 @@ Semua perubahan tercatat di file ini. Format mengacu pada [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-09-03
+
+### Changed
+- **Touchpad:** Mengaktifkan `natural_scroll = yes` (arah scroll natural/alami, bukan inverted).
+- **Touchpad Ergonomics:** Menambahkan `tap-to-click = yes`, `tap-and-drag = yes`, dan `disable_while_typing = yes`.
+- **Gestures:** Mengaktifkan `workspace_swipe = on` (3-finger swipe gesture untuk pindah antar workspace secara smooth).
+
 ## [2.1.0] - 2026-09-03
 
 ### Changed

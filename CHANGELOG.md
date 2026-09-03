@@ -4,6 +4,12 @@ Semua perubahan tercatat di file ini. Format mengacu pada [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-09-03
+
+### Changed
+- **Modern Lua Engine:** Migrasi format konfigurasi Hyprland ke engine modern `hyprland.lua` (standar Hyprland v0.55/v0.56+).
+- **Cleaner Dispatchers:** Menggunakan API `hl.bind`, `hl.config`, `hl.monitor`, `hl.gesture`, dan `hl.window_rule` native Lua.
+
 ## [3.0.0] - 2026-09-03
 
 ### Changed

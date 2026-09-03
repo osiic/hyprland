@@ -5,18 +5,19 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "height": 50,
+  "height": 40,
   "modules-left": ["temperature", "hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "bluetooth", "backlight","pulseaudio", "battery", "clock"],
+  "modules-right": ["network", "bluetooth", "backlight", "pulseaudio", "battery", "clock"],
 
   "hyprland/window": {
     "format": "{}"
   },
 
   "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate"
   },
-
 
   "clock": {
     "format": "{:%H:%M}",
@@ -27,11 +28,11 @@
       "weeks-pos"     : "right",
       "on-scroll"     : 1,
       "format": {
-	"months":     "<span color='#ffead3'><b>{}</b></span>",
-	"days":       "<span color='#ecc6d9'><b>{}</b></span>",
-	"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-	"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-	"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
       }
     },
     "actions":  {
@@ -42,8 +43,8 @@
       "on-scroll-down": "shift_down"
     }
   },
+
   "backlight": {
-    "device": "intel_backlight",
     "format": "{icon} {percent}%",
     "format-icons": ["󰃞", "󰃟", "󰃠"],
     "on-scroll-up": "brightnessctl set 1%+",
@@ -84,25 +85,23 @@
   },
 
   "temperature": {
-    "thermal-zone": 1,
-    "format": "{temperatureF}°F ",
+    "format": "{temperatureC}°C ",
     "critical-threshold": 80,
     "format-critical": "{temperatureC}°C "
   },
 
   "network": {
-	// "interface": "wlp2*", // (Optional) To force the use of this interface
-	"format-wifi": "  {signalStrength}%",
-	"format-ethernet": "{ipaddr}/{cidr}",
-	"tooltip-format": "{essid} - {ifname} via {gwaddr}",
-	"format-linked": "{ifname} (No IP)",
-	"format-disconnected": "Disconnected ⚠",
-	"format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "{ipaddr}/{cidr}",
+    "tooltip-format": "{essid} - {ifname} via {gwaddr}",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
   },
 
   "bluetooth": {
     "format": "",
-    "format-disabled": "", // an empty format will hide the module
+    "format-disabled": "",
     "format-connected": " {num_connections}",
     "tooltip-format": "{device_alias}",
     "tooltip-format-connected": " {device_enumerate}",

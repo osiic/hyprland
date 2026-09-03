@@ -4,6 +4,14 @@ Semua perubahan tercatat di file ini. Format mengacu pada [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-09-03
+
+### Changed
+- **Waybar Temperature:** Mengganti pembacaan unit temperatur dari Fahrenheit (°F) ke Celsius (°C) dan auto-detect sensor thermal.
+- **Waybar Backlight:** Menghapus hardcode device `intel_backlight` agar auto-detect display device.
+- **Hyprland Environment:** Menambahkan environment variables standar Wayland (`QT_QPA_PLATFORM`, `GDK_BACKEND`, `ELECTRON_OZONE_PLATFORM_HINT`, dll).
+- **Hyprland Portal:** Membersihkan autostart redundant script, mengandalkan native systemd & dbus activation `xdg-desktop-portal-hyprland`.
+
 ## [2.0.0] - 2026-09-03
 
 ### Changed

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -178,10 +179,10 @@ Rectangle {
                         radius: Theme.radiusSm
                         color: "transparent"
 
-                        Image {
+                        IconImage {
                             anchors.centerIn: parent
-                            width: 14
-                            height: 14
+                            width: 16
+                            height: 16
                             source: trayItem.modelData.icon || ""
                         }
 
@@ -191,7 +192,7 @@ Rectangle {
                             cursorShape: Qt.PointingHandCursor
                             onClicked: mouse => {
                                 if (mouse.button === Qt.RightButton) {
-                                    trayItem.modelData.openMenu();
+                                    trayItem.modelData.display(bar, mouse.x, mouse.y);
                                 } else {
                                     trayItem.modelData.activate();
                                 }

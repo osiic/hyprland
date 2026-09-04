@@ -4,6 +4,15 @@ Semua perubahan tercatat di file ini. Format mengacu pada [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Changed
+- **Hyprland Native Lua Migration:** Migrasi penuh dari legacy `hyprland.conf` ke engine standar terbaru `hyprland.lua` (Hyprland v0.56.2) dengan API `hl.config`, `hl.gesture`, `hl.curve`, `hl.animation`, `hl.dsp`, dan `hl.bind`.
+
+### Added
+- **Touchpad Gestures:** Native 1:1 3-finger horizontal workspace swipe via `hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })`.
+
+### Fixed
+- **System Tray Icons & Menu:** Gunakan `Quickshell.Widgets.IconImage` dan method `display()` native Quickshell untuk render tray icon aplikasi dan context menu DBus.
+
 ## [3.1.0] - 2026-09-03
 
 ### Changed

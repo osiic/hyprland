@@ -4,11 +4,19 @@ Semua perubahan tercatat di file ini. Format mengacu pada [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Added
+- **Quickshell App Launcher:** Keyboard-driven native application search & launcher overlay (`SUPER + SPACE`).
+- **Quickshell MPRIS Media Controller:** Native floating media player pill & popup (`SUPER + M`).
+- **Unified Theme Singleton:** Centralized near-black dark theme system in `config/Theme.qml` & `components/Surface.qml`.
+- **Touchpad Gestures:** Native 1:1 3-finger horizontal workspace swipe via `hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })`.
+
 ### Changed
 - **Hyprland Native Lua Migration:** Migrasi penuh dari legacy `hyprland.conf` ke engine standar terbaru `hyprland.lua` (Hyprland v0.56.2) dengan API `hl.config`, `hl.gesture`, `hl.curve`, `hl.animation`, `hl.dsp`, dan `hl.bind`.
-
-### Added
-- **Touchpad Gestures:** Native 1:1 3-finger horizontal workspace swipe via `hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })`.
+- **Keybindings Update:**
+  - `SUPER + SPACE`: Quickshell App Launcher.
+  - `SUPER + M`: Quickshell Media Controller.
+  - `SUPER + X`: Quickshell Power Menu.
+  - `SUPER + C`: Quickshell Control Center.
 
 ### Fixed
 - **System Tray Icons & Menu:** Gunakan `Quickshell.Widgets.IconImage` dan method `display()` native Quickshell untuk render tray icon aplikasi dan context menu DBus.

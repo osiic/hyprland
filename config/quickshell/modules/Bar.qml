@@ -5,7 +5,8 @@ import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
-import ".."
+import Quickshell.Services.Mpris
+import "../config"
 
 Rectangle {
     id: bar
@@ -16,6 +17,10 @@ Rectangle {
 
     signal toggleControlCenter()
     signal togglePowerMenu()
+    signal toggleLauncher()
+    signal toggleMedia()
+
+    readonly property MprisPlayer player: Mpris.players.values[0] || null
 
     // Top subtle border highlight
     Rectangle {
@@ -28,20 +33,22 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
-        spacing: 12
+        anchors.leftMargin: Theme.spaceMd
+        anchors.rightMargin: Theme.spaceMd
+        spacing: Theme.spaceMd
 
-        // ================= LEFT: WORKSPACES & ACTIVE WINDOW =================
+        // ================= LEFT: LAUNCHER ICON & WORKSPACES =================
         RowLayout {
             spacing: 6
 
-            // Arch / App Icon
+            // Launcher Button
             Rectangle {
                 width: 24
                 height: 24
                 radius: Theme.radiusSm
                 color: Theme.bgSurface
+                border.color: Theme.borderSubtle
+                border.width: 1
 
                 Text {
                     anchors.centerIn: parent
@@ -54,13 +61,13 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: bar.toggleControlCenter()
+                    onClicked: bar.toggleLauncher()
                 }
             }
 
-            // Workspaces (1-10 Minimal Badges)
+            // Workspaces (1-6 Badges)
             Repeater {
-                model: 6 // 6 main workspaces
+                model: 6
                 delegate: Rectangle {
                     id: wsBadge
                     required property int index
@@ -75,7 +82,7 @@ Rectangle {
                     border.width: 1
 
                     Behavior on width {
-                        NumberAnimation { duration: 150; easing.type: Easing.OutQuad }
+                        NumberAnimation { duration: Theme.animFast; easing.type: Easing.OutQuad }
                     }
 
                     Text {
@@ -96,10 +103,10 @@ Rectangle {
             }
         }
 
-        // Active Window Title (Muted, Minimal)
+        // Active Window Title
         Text {
             Layout.fillWidth: true
-            Layout.maximumWidth: 350
+            Layout.maximumWidth: 260
             elide: Text.ElideRight
             text: Hyprland.focusedWindow ? (Hyprland.focusedWindow.title || Hyprland.focusedWindow.className) : "Desktop"
             color: Theme.textMuted
@@ -109,54 +116,98 @@ Rectangle {
 
         Item { Layout.fillWidth: true } // Spacer
 
-        // ================= CENTER: CLOCK & DATE =================
-        Rectangle {
-            height: 24
-            implicitWidth: clockRow.implicitWidth + 16
-            radius: Theme.radiusSm
-            color: Theme.bgSurface
-            border.color: Theme.borderSubtle
-            border.width: 1
+        // ================= CENTER: MEDIA & CLOCK =================
+        RowLayout {
+            spacing: Theme.spaceSm
 
-            RowLayout {
-                id: clockRow
-                anchors.centerIn: parent
-                spacing: 6
+            // Floating Media Pill
+            Rectangle {
+                visible: bar.player !== null
+                height: 24
+                implicitWidth: Math.min(mediaRow.implicitWidth + 16, 200)
+                radius: Theme.radiusSm
+                color: Theme.bgSurface
+                border.color: Theme.borderSubtle
+                border.width: 1
 
-                Text {
-                    text: "󰥔"
-                    color: Theme.accent
-                    font.family: Theme.fontMono
-                    font.pixelSize: 12
+                RowLayout {
+                    id: mediaRow
+                    anchors.centerIn: parent
+                    spacing: 6
+
+                    Text {
+                        text: (bar.player && bar.player.playbackState === MprisPlaybackState.Playing) ? "󰎆" : "󰏤"
+                        color: Theme.accent
+                        font.family: Theme.fontMono
+                        font.pixelSize: 11
+                    }
+
+                    Text {
+                        text: bar.player ? (bar.player.trackTitle || "Media") : ""
+                        color: Theme.textSecondary
+                        font.family: Theme.fontSans
+                        font.pixelSize: 10
+                        elide: Text.ElideRight
+                        Layout.maximumWidth: 140
+                    }
                 }
 
-                Text {
-                    id: timeText
-                    color: Theme.textPrimary
-                    font.family: Theme.fontMono
-                    font.pixelSize: 11
-                    font.bold: true
-
-                    Timer {
-                        interval: 1000
-                        running: true
-                        repeat: true
-                        triggeredOnStart: true
-                        onTriggered: {
-                            const d = new Date();
-                            const hours = String(d.getHours()).padStart(2, '0');
-                            const mins = String(d.getMinutes()).padStart(2, '0');
-                            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                            timeText.text = `${dayNames[d.getDay()]} ${hours}:${mins}`;
-                        }
-                    }
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: bar.toggleMedia()
                 }
             }
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: bar.toggleControlCenter()
+            // Clock & Date Pill
+            Rectangle {
+                height: 24
+                implicitWidth: clockRow.implicitWidth + 16
+                radius: Theme.radiusSm
+                color: Theme.bgSurface
+                border.color: Theme.borderSubtle
+                border.width: 1
+
+                RowLayout {
+                    id: clockRow
+                    anchors.centerIn: parent
+                    spacing: 6
+
+                    Text {
+                        text: "󰥔"
+                        color: Theme.accent
+                        font.family: Theme.fontMono
+                        font.pixelSize: 12
+                    }
+
+                    Text {
+                        id: timeText
+                        color: Theme.textPrimary
+                        font.family: Theme.fontMono
+                        font.pixelSize: 11
+                        font.bold: true
+
+                        Timer {
+                            interval: 1000
+                            running: true
+                            repeat: true
+                            triggeredOnStart: true
+                            onTriggered: {
+                                const d = new Date();
+                                const hours = String(d.getHours()).padStart(2, '0');
+                                const mins = String(d.getMinutes()).padStart(2, '0');
+                                const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                                timeText.text = `${dayNames[d.getDay()]} ${hours}:${mins}`;
+                            }
+                        }
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: bar.toggleControlCenter()
+                }
             }
         }
 
